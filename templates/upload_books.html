@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" style="margin-top: 500px;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPLOAD BOOKS</title>
+    <style>
+        .carousel-item img {
+            height: 300px; /* Set your desired height */
+            object-fit: cover; /* Ensure the image fits well without distortion */
+        }
+
+        /* Styling for the container and spacing between sections */
+        .container {
+            margin-top: 30px;
+        }
+
+        h1, h2 {
+            background: yellow;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .form-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Optional: Add some space between elements */
+        .form-container input, .form-container button {
+            margin-top: 10px;
+        }
+    </style>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABQ2I5D09f3nKX9BOvWScA7fTW+z6FkFvJ6gDdf9gpx5tsBqBXkS45c" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container-fluid" style = "
+        margin-top: -500px;">
+        <img src="/static/1.jfif.png" class="d-block w-300" alt="/static/7.jfif.png"
+        style = "width : 1400px ;
+                 height : 490px">
+        </div>
+      </div>
+    <!-- Upload Books Section -->
+    <div class="container">
+        <h1>Upload Books</h1>
+        <div class="form-container">
+            <form method="POST" enctype="multipart/form-data" action="upload_books/">
+                {% csrf_token %}
+                <label for="excel_file">Upload Excel File:</label>
+                <input type="file" id="excel_file" name="excel_file" required>
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+
+        <!-- Download Template Section -->
+        <h2>Download Template</h2>
+        <div class="form-container">
+            <a href="{% url 'download_template' %}">Download Excel Template</a>
+        </div>
+    </div>
+
+    <!-- Display success/error messages -->
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <!-- Bootstrap JavaScript (with Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gyb4iFqHnzVf4A55M3hP6s2jl5gyykl0QqVmX98B6kHjDSc6S72" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-J1pR3H03eAxa0CTmOg/tEGrwWJRaftulQ+8yFvhldjtWqz1wlgV7r4Jd7ouTx5EXa" crossorigin="anonymous"></script>
+</body>
+</html>

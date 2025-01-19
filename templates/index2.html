@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Books</title>
+    
+    <!-- Load static files in Django template -->
+    {% load static %}
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJ6F6%2F1N1pB3bhOj9%2BJNzYyI8Q%2FZjFb%2FJCt0CzY2ENb5bK%2FWXrY%2F%2FjyC9T%2FfG9PHZTtG5BsM" crossorigin="anonymous">
+    
+    <!-- Custom styles -->
+    <style>
+        /* Full page background */
+        body {
+            background-color: #f4f4f4;
+            margin-top: 0px;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            background-color: #343a40;
+        }
+
+        .navbar-brand, .nav-link {
+            color: #fff !important;
+        }
+
+        /* Grid Container */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Two columns */
+            grid-template-rows: repeat(2, 1fr); /* Two rows */
+            gap: 50px; /* Space between grid items */
+            width: 100%; /* Full width of the parent container */
+            max-width: 700px; /* Optional: Limit maximum size */
+            margin: 0 auto; /* Center the grid horizontally */
+            aspect-ratio: 1 / 1; /* Ensure the grid stays square */
+            padding: 30px;
+        }
+
+        /* Grid Items */
+        .grid-item {
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            aspect-ratio: 1 / 1; /* Ensures each grid item is square */
+            border-radius: 10px; /* Rounded corners */
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+        }
+
+        .overlay {
+            color: #fff;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5); 
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .overlay h3 {
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr; 
+            }
+        }
+        .id-card {
+            width: 233px; 
+            padding: 13px; 
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            background: #f8f9fa;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: absolute; /* Absolute positioning */
+            top: 80px; /* Position just below the navbar */
+            left: 20px; 
+        }
+        
+        .id-card img {
+            border-radius: 50%;
+            width: 100px; 
+            height: 100px; 
+            object-fit: cover;
+            margin-bottom: 13px; 
+        }
+        
+        .id-card h3 {
+            font-size: 21px; 
+            margin-bottom: 11px; 
+        }
+        
+        .id-card p {
+            font-size: 18px; 
+            margin: 6px 0;
+        }
+  
+    </style>
+</head>
+<body>
+    <form method="POST" action="{% url 'delete_all_profiles' %}" style = "position: absolute;
+    margin-top: 710px;
+    margin-left: 1310px;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">LOGOUT</button>
+    </form>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Administrator Home Page</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/create-profile">My Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/upload_books">Upload Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/form">Book Registration</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/books">Find Books</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Grid Container for your content -->
+    <div class="grid-container">
+        <!-- My Profile Section -->
+        <div class="grid-item" style="background-image: url('{% static "8.jfif.png" %}');">
+            <div class="overlay" style="margin-top: 180px; width: 300px;height: 100px;">
+                <h3>MY PROFILE</h3>
+                <a role="button" tabindex="0" href="create-profile" class="btn btn-dark">CLICK HERE</a>
+            </div>
+        </div>
+
+        <!-- Upload Books Section -->
+        <div class="grid-item" style="background-image: url('{% static "9.jfif.png" %}');">
+            <div class="overlay" style="margin-top: 180px;width: 300px;height: 100px;">
+                <h3>UPLOAD BOOKS</h3>
+                <a role="button" tabindex="0" href="/upload_books" class="btn btn-dark">CLICK HERE</a>
+            </div>
+        </div>
+
+        <!-- Book Registration Section -->
+        <div class="grid-item" style="background-image: url('{% static "10.jfif.png" %}');">
+            <div class="overlay" style="margin-top: 160px;width: 300px;height: 100px;">
+                <h3>BOOK REGISTRATION</h3>
+                <a role="button" tabindex="0" href="/form" class="btn btn-dark">CLICK HERE</a>
+            </div>
+        </div>
+
+        <!-- Find Books Section -->
+        <div class="grid-item" style="background-image: url('{% static "11.jfif.png" %}');">
+            <div class="overlay" style="margin-top: 180px;width: 300px;height: 100px;">
+                <h3>FIND BOOKS</h3>
+                <a role="button" tabindex="0" href="/books" class="btn btn-dark">CLICK HERE</a>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JavaScript (with Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <div class="container mt-5">
+      {% if profile %}
+        <div class="id-card">
+            <img src="{{ profile.profile_picture.url }}" alt="Profile Picture">
+            <h3>{{ profile.name }}</h3>
+            <p><strong>BITS-ID:</strong> {{ profile.bits_id }}</p>
+            <p><strong>PSRN:</strong> {{ profile.psrn }}</p>
+            <p><strong>Phone:</strong> {{ profile.phone }}</p>
+            <p><strong>Department:</strong> {{ profile.department }}</p>
+        </div>
+        {% else %}
+        <p class="text-danger">No profile found! Please create your profile.</p>
+        {% endif %}
+</body>
+</html>

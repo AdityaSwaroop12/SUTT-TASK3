@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+            padding: 10px;
+            max-width: 600px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-right: 10px;
+            transition: border-color 0.3s ease;
+        }
+    
+        input[type="text"]:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+    
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+    
+        button:hover {
+            background-color: #0056b3;
+        }
+    
+        button:active {
+            background-color: #003d82;
+        }
+    </style>
+    
+</head>
+<body>
+    <h1 style = "background: yellow;">AVAILABLE BOOKS :-</h1>
+    <form method="GET" action="/books">
+        <input type="text" name="query" placeholder="Search by book title">
+        <button type="submit">Search</button>
+    </form>
+    <!-- Display Books -->
+    {% if books %}
+        <ul>
+            {% for book in books %}
+                <li style = "padding-top: 5px; padding-bottom: 5px;">
+                    <strong>{{ book.title }}</strong> by {{ book.author }}<br>
+                    ISBN: {{ book.isbn }}<br>
+                    Publisher: {{ book.publisher }}<br>
+                    Total Copies: {{ book.total_copies }}<br>
+                {% if book.image %}
+                    <img src="{{ book.image.url }}" alt="Book Cover" style="width:100px;">
+                {% else %}
+                    <img src="/path/to/default/image.jpg" alt="No image available" style="width:100px;">
+                {% endif %}
+                {% if not request.session.from_index2 %}
+                    <form method="POST" action="{% url 'borrow_book' book.id %}">
+                        {% csrf_token %}
+                        <button type="submit">Borrow</button>
+                    </form>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No books found matching your search query.</p>
+    {% endif %}
+    <form method="POST" action="/index1" style = "position: absolute;
+    margin-top: -1320px;
+    margin-left: 1250px;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Back to Home</button>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8d7da;
+            color: #721c24;
+            margin: 0;
+            padding: 50px;
+        }
+        .error-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #f5c6cb;
+            border-radius: 10px;
+            background-color: #f9ebeb;
+        }
+        h1 {
+            font-size: 24px;
+        }
+        p {
+            font-size: 18px;
+        }
+        .btn {
+            background-color: #721c24;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background-color: #5a1a1b;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="error-container">
+        <h1>Error: Unable to Borrow the Book</h1>
+        <p>{{ error }}</p>
+        <a href="/" class="btn">Go Back to Home</a>
+    </div>
+
+</body>
+</html>
